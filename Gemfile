@@ -42,6 +42,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rack-timeout', require: 'rack/timeout/base'
 gem 'sprockets', '< 4'
 gem 'sassc-rails'
+gem "http"
+
+gem 'execjs'
+gem 'therubyracer', :platforms => :ruby
+
 group :development, :test do
   gem 'awesome_print'
   gem 'dotenv-rails'
