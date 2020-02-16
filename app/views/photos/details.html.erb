@@ -21,27 +21,9 @@
     2 months ago
   </dd>
 
-  <dt>Fans</dt>
-  <dd>
-    <%= @photo.fan_list %>
-  </dd>
-
-  <dt>Add a fan</dt>
-  <dd>
-    <form action="/insert_like_record" method="post">
-      <label for="browser_pic_id">Photo ID</label>
-      <input id="browser_pic_id" type="text" value="<%= @photo.id %>" name="input_photo_id">
-
-      <label for="browser_fan_id">Fan ID</label>
-      <input id="browser_fan_id" type="text" name="input_fan_id">
-
-      <button>Add fan</button>
-    </form>
-  </dd>
-
   <dt>Edit photo</dt>
   <dd>
-    <form action="/update_photo/<%= @photo.id %>" method="post">
+    <form action="/update_photo/<%= @photo.id %>">
       <label for="browser_image">Image</label>
       <input id="browser_image" type="text" name="input_image" placeholder="Enter a URL for the image..." value="<%= @photo.image %>">
 
@@ -68,6 +50,7 @@
     <th>Comment</th>
     <th>Posted</th>
   </tr>
+
   <% @photo.comments.each do |comment| %>
   <tr>
     <td>
@@ -82,6 +65,7 @@
       <%= time_ago_in_words(comment.created_at) %>
     </td>
   </tr>
+  
   <% end %>
 </table>
 
