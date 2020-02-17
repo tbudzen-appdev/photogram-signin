@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!, :only => [:sign_in, :add_cookie, :sign_up, :create]
+  skip_before_action :authenticate_user!, :only => [:sign_in, :add_cookie, :registration_form, :create]
 
   def sign_in
     render({ :template => "users/sign_in.html.erb"})
   end
   
-  def sign_up
+  def registration_form
     render({ :template => "users/sign_up.html.erb"})
   end
 
@@ -44,8 +44,11 @@ class UsersController < ApplicationController
     user = User.new
 
     user.username = params.fetch("input_username")
+    user.password = params.fetch("input_password")
+    user.password_confirmation = params.fetch("input_password_confirmation")
 
     user.save
+    session.store(:user_id, user.id)
 
     redirect_to("/users/#{user.username}")
   end
