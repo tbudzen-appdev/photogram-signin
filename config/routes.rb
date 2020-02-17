@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
 
   get("/", { :controller => "users", :action => "index" })
+  get("/sign_in", { :controller => "users", :action => "sign_in" })
+  get("/sign_up", { :controller => "users", :action => "registration_form" })
+  get("/sign_out", { :controller => "users", :action => "remove_cookies" })
+
+  post("/verify_credentials", { :controller => "users", :action => "add_cookie" })
 
   # User routes
 
   # CREATE
-  get("/insert_user_record", {:controller => "users", :action => "create" })
+  post("/insert_user_record", {:controller => "users", :action => "create" })
 
   # READ
   get("/users", {:controller => "users", :action => "index"})
   get("/users/:the_username", {:controller => "users", :action => "show"})
 
   # UPDATE
-  get("/update_user/:the_user_id", {:controller => "users", :action => "update" })
+  post("/update_user/:the_user_id", {:controller => "users", :action => "update" })
 
   # DELETE
   get("/delete_user/:the_user_id", {:controller => "users", :action => "destroy"})
@@ -20,7 +25,7 @@ Rails.application.routes.draw do
   # Photo routes
 
   # CREATE
-  get("/insert_photo_record", { :controller => "photos", :action => "create" })
+  post("/insert_photo_record", { :controller => "photos", :action => "create" })
 
   # READ
   get("/photos", { :controller => "photos", :action => "index"})
@@ -28,7 +33,7 @@ Rails.application.routes.draw do
   get("/photos/:the_photo_id", { :controller => "photos", :action => "show"})
 
   # UPDATE
-  get("/update_photo/:the_photo_id", { :controller => "photos", :action => "update" })
+  post("/update_photo/:the_photo_id", { :controller => "photos", :action => "update" })
 
   # DELETE
   get("/delete_photo/:the_photo_id", { :controller => "photos", :action => "destroy"})
@@ -36,7 +41,7 @@ Rails.application.routes.draw do
   # Comment routes
 
   # CREATE
-  get("/insert_comment_record", { :controller => "comments", :action => "create" })
+  post("/insert_comment_record", { :controller => "comments", :action => "create" })
 
   # DELETE
 

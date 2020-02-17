@@ -1,4 +1,32 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user!, :only => [:sign_in, :add_cookie, :sign_up, :create]
+
+  def sign_in
+    render({ :template => "users/sign_in.html.erb"})
+  end
+  
+  def sign_up
+    render({ :template => "users/sign_up.html.erb"})
+  end
+
+  def add_cookie
+    user = User.where({ :username => params.fetch("qs_username") }).at(0)
+
+    if user != nil && user.authenticate(params.fetch("qs_password"))
+      session[:user_id] = user.id
+
+      redirect_to("/", { :notice => "Signed in successfully." })
+    else
+      redirect_to("/sign_in", { :alert => "Something went wrong. Please try again." })
+    end
+  end
+
+  def remove_cookies
+    reset_session
+
+    redirect_to("/", { :notice => "Signed out successfully." })
+  end
+
   def index
     @users = User.all.order({ :username => :asc })
 
